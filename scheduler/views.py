@@ -1,11 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Schedule
-# import requests
-import json
 from rest_framework.views import APIView
 
 
@@ -21,7 +15,6 @@ class Scheduler(APIView):
         candidate_from_time = candidate_schedule.start_time
         interviewer_to_time += 1
         candidate_to_time += 1
-        # print(candidate_schedule.interview_date,'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         if interviewer_from_time and interviewer_to_time and candidate_from_time and candidate_to_time is not None:
             response = range_conversion(interviewer_from_time=interviewer_from_time,
                                         interviewer_to_time=interviewer_to_time,
@@ -51,7 +44,6 @@ class Scheduler(APIView):
         schedule.interview_date = request.data['interview_date']
         schedule.save()
         return Response({'message': 'Interview Schedule updated Successfully'})
-
 
 
 def range_conversion(interviewer_from_time, interviewer_to_time,
